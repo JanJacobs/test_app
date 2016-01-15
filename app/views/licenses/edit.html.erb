@@ -1,6 +1,5 @@
-<h1>Editing license</h1>
-
-<%= render 'form' %>
-
-<%= link_to 'Show', @license %> |
-<%= link_to 'Back', licenses_path %>
+<%- model_class = License -%>
+<div class="page-header">
+  <h1><%=t '.title', :default => [:'helpers.titles.edit', 'Edit %{model}'], :model => License %></h1>
+</div>
+<%= render :partial => 'form' %>

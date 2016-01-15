@@ -1,25 +1,36 @@
-<h1>Listing licenses</h1>
-
-<table>
+<%- model_class = License -%>
+<div class="page-header">
+  <h1><%=t '.title', :default => License %></h1>
+</div>
+<table class="table table-striped">
   <thead>
     <tr>
-      <th>Key</th>
-      <th colspan="3"></th>
+      <th>ID</th>
+      <th><%= model_class.human_attribute_name(:key) %></th>
+      <th><%= model_class.human_attribute_name(:created_at) %></th>
+      <th><%=t '.actions', :default => t("helpers.actions") %></th>
     </tr>
   </thead>
-
   <tbody>
     <% @licenses.each do |license| %>
       <tr>
+        <td><%= license.id %></td>
         <td><%= license.key %></td>
-        <td><%= link_to 'Show', license %></td>
-        <td><%= link_to 'Edit', edit_license_path(license) %></td>
-        <td><%= link_to 'Destroy', license, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%=l license.created_at, format: :long %></td>
+        <td>
+          <%= link_to license_path(license), :class => 'btn btn-xs', :title => "#{ t('.show', :default => t('helpers.links.show')) }" do %>
+            <%= glyph 'info-sign' %>
+            <%= glyph 'pencil' %>
+          <%- end -%>
+          <%= link_to license_path(license), :method => :delete, :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) }, :class => 'btn btn-xs', :title => "#{ t('.destroy', :default => t('helpers.links.destroy')) }" do %>
+            <%= glyph 'remove' %>
+          <%- end -%>
+        </td>
       </tr>
     <% end %>
   </tbody>
 </table>
 
-<br>
-
-<%= link_to 'New License', new_license_path %>
+<%= link_to t('.new', :default => t("helpers.links.new")),
+            new_license_path,
+            :class => 'btn btn-primary' %>
