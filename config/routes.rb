@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get 'visitors/index'
+
   resources :products
 
   resources :components
